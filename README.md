@@ -18,7 +18,7 @@ Companion open-source codebase, Jupyter notebooks, and empirical pricing models 
 > *Financial Principles, Pricing, Risk, and Machine Learning*  
 > **Authors:** Chiu Yan & Xuan Xin  
 > **Get the Book:** [Available on Amazon](https://www.amazon.com/dp/B0HKYDTK8C/)  
-> **Website & Issues:** [https://github.com/henrywoo/mortgage-markets-in-the-age-of-ai](https://github.com/henrywoo/mortgage-markets-in-the-age-of-ai)
+> **Website & Issues:** [https://github.com/xuanxinjushi/mortgage](https://github.com/xuanxinjushi/mortgage)
 
 ---
 
@@ -69,7 +69,7 @@ Each chapter in this repository is self-contained with Python scripts and dual-l
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/henrywoo/mortgage-markets-in-the-age-of-ai.git
+git clone https://github.com/xuanxinjushi/mortgage.git
 cd mortgage-markets-in-the-age-of-ai
 ```
 
@@ -160,7 +160,7 @@ Each chapter notebook provides both English (`*.ipynb`) and Chinese (`*_zh.ipynb
 
 If you find an error in the text, code, or notebooks, we welcome issues and pull requests!
 
-- **Issue Tracker:** [https://github.com/henrywoo/mortgage-markets-in-the-age-of-ai/issues](https://github.com/henrywoo/mortgage-markets-in-the-age-of-ai/issues)
+- **Issue Tracker:** [https://github.com/xuanxinjushi/mortgage/issues](https://github.com/xuanxinjushi/mortgage/issues)
 - Please mention the relevant chapter, section, or script name to help us fix it quickly.
 
 ---
