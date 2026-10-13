@@ -56,7 +56,6 @@ def pool_price_and_duration(market_rate: float, wac: float = WAC, term: int = TE
         cpr = cpr_curve(inc_bp)
         smm = cpr_to_smm(cpr)
         balance = 100.0
-        pmt = mortgage_payment(balance, wac, term)
         flows, times = [], []
         servicing = 0.0050
         oas = 0.0060
@@ -65,6 +64,7 @@ def pool_price_and_duration(market_rate: float, wac: float = WAC, term: int = TE
             if balance <= 1e-6:
                 break
             interest = balance * wac / 12.0
+            pmt = mortgage_payment(balance, wac, term - m + 1)   # re-amortized monthly
             scheduled = min(pmt - interest, balance)
             prepaid = (balance - scheduled) * smm
             cash_flow = interest * (1.0 - servicing / wac) + scheduled + prepaid

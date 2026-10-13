@@ -17,7 +17,8 @@ from mortgagekit.prepayment import cpr_to_smm
 WAC = 0.065          # Jack's 6.5% note: the pool's weighted average coupon
 TERM = 360           # months remaining
 SERVICING = 0.0050   # servicing + guarantee fee stripped from the coupon
-OAS = 0.0050         # spread the pool trades at, held fixed across bumps
+SPREAD = 0.0050      # static spread the pool trades at over the market rate, held fixed
+                     # across bumps; one cash-flow path, so no option cost is taken out
 
 
 # Out-of-the-money speed, measured rather than assumed: 10% CPR is what
@@ -48,11 +49,12 @@ def pool_cash_flows(mortgage_rate: float) -> tuple[np.ndarray, np.ndarray]:
     smm = cpr_to_smm(cpr)
 
     balance = 100.0
-    payment = mortgage_payment(balance, WAC, TERM)
     times, flows = [], []
     for month in range(1, TERM + 1):
         if balance <= 1e-10:
             break
+        # re-amortize what is left over the months that are left, as a real pool does
+        payment = mortgage_payment(balance, WAC, TERM - month + 1)
         interest = balance * WAC / 12.0
         scheduled = min(payment - interest, balance)
         prepaid = (balance - scheduled) * smm
@@ -64,9 +66,9 @@ def pool_cash_flows(mortgage_rate: float) -> tuple[np.ndarray, np.ndarray]:
 
 
 def pool_price(mortgage_rate: float) -> float:
-    """Present value of the pool, discounted at the market rate plus OAS."""
+    """Present value of the pool, discounted at the market rate plus the spread."""
     times, flows = pool_cash_flows(mortgage_rate)
-    return float(np.sum(flows * np.exp(-(mortgage_rate + OAS) * times)))
+    return float(np.sum(flows * np.exp(-(mortgage_rate + SPREAD) * times)))
 
 
 def effective_risk(rate: float, bump: float = 0.0025) -> tuple[float, float, float]:

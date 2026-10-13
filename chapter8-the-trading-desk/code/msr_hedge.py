@@ -37,12 +37,12 @@ def msr_value(mortgage_rate: float) -> float:
     """Present value of the net servicing strip on 100 of serviced balance."""
     smm = _dh.cpr_to_smm(_dh.cpr_curve(WAC - mortgage_rate))
     balance = 100.0
-    payment = _dh.mortgage_payment(balance, WAC, TERM)
     value, disc = 0.0, mortgage_rate + MSR_SPREAD
     for month in range(1, TERM + 1):
         if balance <= 1e-10:
             break
         value += balance * (SERVICING_FEE - SERVICING_COST) / 12.0 * np.exp(-disc * month / 12.0)
+        payment = _dh.mortgage_payment(balance, WAC, TERM - month + 1)   # re-amortized monthly
         interest = balance * WAC / 12.0
         scheduled = min(payment - interest, balance)
         balance -= scheduled + (balance - scheduled) * smm
