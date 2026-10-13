@@ -8,7 +8,7 @@
 
 <p align="left">
   <a href="https://www.amazon.com/dp/B0HKYDTK8C/">
-    <img src="https://m.media-amazon.com/images/I/71sseRBOoVL._SL1500_.jpg" alt="Mortgage Markets in the Age of AI" width="300" />
+    <img src="https://m.media-amazon.com/images/I/61aLXMnb7pL._SL1430_.jpg" alt="Mortgage Markets in the Age of AI" width="300" />
   </a>
 </p>
 
